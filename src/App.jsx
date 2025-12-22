@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div>
-      <h1>First Action</h1>
+      <h1>First Actions</h1>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-name: CI Pipline
+name: app deploy
 
 on: [push]
 
@@ -7,13 +7,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+      - uses: actions/checkout@v4
+
+      - name: setup Node
+       uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
       - name: install dependency
         run: npm install
 
       - name: build application
         run: npm run build
+      
+      - name: deploy on github page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
 
-      - name: Run Tests
-        run: npm test | true
+
+
+
